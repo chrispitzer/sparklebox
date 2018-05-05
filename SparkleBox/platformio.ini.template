@@ -14,7 +14,11 @@ board = espea32
 framework = arduino
 
 
+; on a mac....
 ; this is the port if you're using the mac serial driver.
 ; see this setup guide...
 ; http://www.instructables.com/id/Getting-Started-With-ESP32-on-a-Mac-Blink-and-LED/
 upload_port = /dev/cu.SLAB_USBtoUART
+
+; on a windows PC....
+; upload_port = COM4
