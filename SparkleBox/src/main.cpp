@@ -19,10 +19,9 @@ Scene Data:
     patterns: [
       {
         id: some_pattern_id,
-        setting1: 
+        setting1:
       }
 
-  
     ]
 
   }
@@ -34,10 +33,10 @@ These are the functions we need...
 
 * directorRunFrame
 * sceneRunFrame(
-  time= a 32 bit positive int, that is what frame we are on.
+  time= an "unsigned int" (32 bit), that is what frame we are on.
 )
 
-  
+
 
 * patternRunFrame(
   pattern_type_id= an id that tells us which pattern to run - each pattern is a funciton
@@ -46,11 +45,11 @@ These are the functions we need...
   shared_random_number = 16 bit number - this is a random number that is shared, for this frame, with all pattern generators.
   unique_random_number = 16 bit number - this is 
 
-  settingA = short int 	(2bytes 	-32768 to 32767)
-  settingB = short int
-  settingC = short int
-  settingD = short int
-  settingE = short int
+  settingA = float
+  settingB = float
+  settingC = float
+  settingD = float
+  settingE = float
 
   number_of_pixels_to_emit = unsigned short int
 )
@@ -60,84 +59,40 @@ These are the functions we need...
 
 
 
-==== Brainstorm area ====
 
--- a few ideas on different kinds of patterns to write --
-* solid color
-  - choose a color
-  - set brightness
-          name: "solid color"
-          settings_definition:
-            {
-              setting_A_name: "pick a color"
-              setting_A_min: 0
-              setting_A_max: 359
-              setting_A_increment: 1
-
-              setting_B_name: "brightness"
-              setting_B_min: 0
-              setting_B_max: 100
-              setting_B_increment: 1
-
-              setting_C_name: ""
-              setting_C_min: 0
-              setting_C_max: 0
-              setting_C_increment: 1
-
-              setting_D_name: ""
-              setting_D_min: 0
-              setting_D_max: 0
-              setting_D_increment: 1
-
-              setting_E_name: ""
-              setting_E_min: 0
-              setting_E_max: 0
-              setting_E_increment: 1
-            }
-
-* full strip rainbow cycle
-  - travel speed (rate of hue change, frame by frame, for first pixel)
-  - rainbow length (difference of hue from one pixel to the next)
-          name: "rainbow cycle"
-          settings_definition:
-            {
-              setting_A_name: "travel speed"
-              setting_A_min: 0
-              setting_A_max: 359
-              setting_A_increment: .01
-
-              setting_B_name: "rainbow length"
-              setting_B_min: 0
-              setting_B_max: 100
-              setting_B_increment: .5
-
-              setting_C_name: ""
-              setting_C_min: 0
-              setting_C_max: 0
-              setting_D_increment: 1
-
-              setting_D_name: ""
-              setting_D_min: 0
-              setting_D_max: 0
-              setting_D_increment: 1
-
-              setting_E_name: ""
-              setting_E_min: 0
-              setting_E_max: 0
-              setting_E_increment: 1
-            }
-
-
-* rainbow slugs    (THIS ONE IS KINDA COMPLICATED - MAYBE LETS NOT DO THIS FIRST)
-  - slug speed
-  - slug size
-  - slug spawn rate
-  - speed slugs change color
+============= Patterns ==============
 
 
 
-* sparkles   (THIS IS A GOOD OPTION FOR US!)
- - TO DO - flesh this out.
+loop () {
+  // loop runs every frame
+  directorRunFrame()
+}
+
+
+time = 0
+currently_selected_scene = 3
+diretorRunFrame (shared_rng) {
+  time += 1
+  scene_settings = utils.data.get_scene_settings(currently_selected_scene)
+  shared_rng = utils.random.generate_random_number()
+
+  ... something about the nubmer of pixels that the scene is being rendered for...?
+
+  light_pattern = sceneRunFrame(time, scene_settings, shared_rng)
+
+  fast_led.emit(light_pattern)
+}
+
+
+sceneRunFrame (time, scene_settings, shared_rng) {
+  lights_sum = utils.LEDs.blank_led_array
+  for (pattern in scene_settings.patterns) {
+    lights
+  }
+}
+
+
 
 */
 
