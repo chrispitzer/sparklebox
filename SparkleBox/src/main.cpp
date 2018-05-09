@@ -66,29 +66,73 @@ These are the functions we need...
 
 loop () {
   // loop runs every frame
+
   directorRunFrame()
+
 }
 
 
 time = 0
 currently_selected_scene = 3
 diretorRunFrame (shared_rng) {
+
+  // Directors are in charge of running scenes, and then outputting the
+  // color data from the scenes to the LEDs.
+
+  // A basic director might just run one scene, for all the pixels, and dump
+  // that data into the LEDs.
+
+  // A slightly more involved director might run one scene for a while, then
+  // switch to another one after a while.
+
+  // Maybe it might cross fade between scenes.
+
+  // Maybe (WAAAAAY in the future) it might override data in the scene spec
+  // based on things like sensors, etc.
+
+
   time += 1
-  scene_settings = utils.data.get_scene_settings(currently_selected_scene)
-  shared_rng = utils.random.generate_random_number()
+  scene_spec = utils.data.get_scene_spec(currently_selected_scene)
+  director_rng = utils.random.generate_random_number()
 
   ... something about the nubmer of pixels that the scene is being rendered for...?
 
-  light_pattern = sceneRunFrame(time, scene_settings, shared_rng)
+  light_pattern = sceneRunFrame(scene_spec, pixel_count, time, director_rng)
 
+  // maybe wait until it's time for the next frame to be emitted (1/30 of a second, for instance?)
   fast_led.emit(light_pattern)
 }
 
 
-sceneRunFrame (time, scene_settings, shared_rng) {
-  lights_sum = utils.LEDs.blank_led_array
-  for (pattern in scene_settings.patterns) {
-    lights
+sceneRunFrame (scene_spec, pixel_count, time, director_rng) {
+  // Scenes are in charge of running all the patterns within them,
+  // and also blending the results of those patterns together, and then
+  // returning the sum of that blend to the director.
+
+  lights_sum = utils.LEDs.get_blank_pixel_array(pixel_count)
+  scene_rng = utils.random.generate_random_number()
+
+  for (pattern_spec in scene_spec.patterns) {
+    pattern_rng = utils.random.generate_random_number()
+    pattern_lights = patternRunFrame(pattern_spec, pixel_count, time, director_rng, scene_rng, pattern_rng)
+    utils.leds.blend_lights_together
+  }
+}
+
+
+pattern_map: {
+  1: sp
+}
+
+patternRunFrame (pattern_spec, pixel_count, time, director_rng, scene_rng, pattern_rng) {
+  id = pattern_spec.id
+  switch (id) {
+    1:
+      return rainbows(pattern_spec, pixel_count, time, director_rng, scene_rng, pattern_rng)
+    2:
+      return sparkles(pattern_spec, pixel_count, time, director_rng, scene_rng, pattern_rng)
+    3:
+      return etc(pattern_spec, pixel_count, time, director_rng, scene_rng, pattern_rng)
   }
 }
 

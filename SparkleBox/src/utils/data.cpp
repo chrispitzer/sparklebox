@@ -7,6 +7,7 @@ scenes = [
             {
                 id: 5,
                 opacity: .75,
+                blending_thingy: ? maybe we want to tell this something about how to blend the layers in here? 
                 setting_A: 123, // float
                 setting_B: 123, // float
                 setting_C: 123, // float
@@ -20,7 +21,7 @@ scenes = [
     }
 ]
 
-get_scene_settings (scene_id) {
+get_scene_spec (scene_id) {
     return scenes[scene_id]
 }
 
