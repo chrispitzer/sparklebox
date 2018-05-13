@@ -1,76 +1,11 @@
-#define FASTLED_ALLOW_INTERRUPTS 0
+// libraries
+#include "Arduino.h"
 
-
-#include "FastLED.h"
-
-FASTLED_USING_NAMESPACE
-
-
+// directors
+#include "directors/dispatch.h"
 
 
 /*
-
-TODOs
-
-Scene Data:
-[
-  {
-    name: "Purple Glitter",    //  max length: 20 characters
-    patterns: [
-      {
-        id: some_pattern_id,
-        setting1:
-      }
-
-    ]
-
-  }
-]
-
-
-
-These are the functions we need...
-
-* directorRunFrame
-* sceneRunFrame(
-  time= an "unsigned int" (32 bit), that is what frame we are on.
-)
-
-
-
-* patternRunFrame(
-  pattern_type_id= an id that tells us which pattern to run - each pattern is a funciton
-
-  frame_number = this is what "time" we are at
-  shared_random_number = 16 bit number - this is a random number that is shared, for this frame, with all pattern generators.
-  unique_random_number = 16 bit number - this is 
-
-  settingA = float
-  settingB = float
-  settingC = float
-  settingD = float
-  settingE = float
-
-  number_of_pixels_to_emit = unsigned short int
-)
-
-
-* a pattern (a fairly simple example)
-
-
-
-
-============= Patterns ==============
-
-
-
-loop () {
-  // loop runs every frame
-
-  directorRunFrame()
-
-}
-
 
 time = 0
 currently_selected_scene = 3
@@ -141,99 +76,54 @@ patternRunFrame (pattern_spec, pixel_count, time, director_rng, scene_rng, patte
 */
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-#if defined(FASTLED_VERSION) && (FASTLED_VERSION < 3001000)
-#warning "Requires FastLED 3.1 or later; check github for latest code."
-#endif
-
-#define DATA_PIN    2
-//#define CLK_PIN   4
-#define LED_TYPE    WS2811
-#define COLOR_ORDER GRB
-#define NUM_LEDS    150
-CRGB leds[NUM_LEDS];
-
-#define BRIGHTNESS          255
-#define FRAMES_PER_SECOND  120
-
-#define ARRAY_SIZE(A) (sizeof(A) / sizeof((A)[0]))
-
-uint8_t gCurrentPatternNumber = 0; // Index number of which pattern is current
-uint8_t gHue = 0; // rotating "base color" used by many of the patterns
-
-
-
-
-
 void setup() {
-  delay(3000); // 3 second delay for recovery
-  
-  // tell FastLED about the LED strip configuration
-  FastLED.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
-  // FastLED.addLeds<LED_TYPE,DATA_PIN,CLK_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
-
-  // set master brightness control
-  FastLED.setBrightness(BRIGHTNESS);
+  setupDirectors();
+  Serial.begin(9600);
 }
 
 
+void loop() {
+  // maybe we could eventually pass in WHICH director we are interested
+  // in working with?
+  dispatchDirector();
+}
 
-void rainbow() 
-{
+
+/* These were the demo ones...
+
+void rainbow() {
   // FastLED's built-in rainbow generator
   fill_rainbow( leds, NUM_LEDS, gHue, 7);
 }
 
-void addGlitter( fract8 chanceOfGlitter) 
-{
+void addGlitter( fract8 chanceOfGlitter) {
   if( random8() < chanceOfGlitter) {
     leds[ random16(NUM_LEDS) ] += CRGB::White;
   }
 }
 
-void rainbowWithGlitter() 
-{
+void rainbowWithGlitter() {
   // built-in FastLED rainbow, plus some random sparkly glitter
   rainbow();
   addGlitter(80);
 }
 
 
-void confetti() 
-{
+void confetti() {
   // random colored speckles that blink in and fade smoothly
   fadeToBlackBy( leds, NUM_LEDS, 10);
   int pos = random16(NUM_LEDS);
   leds[pos] += CHSV( gHue + random8(64), 200, 255);
 }
 
-void sinelon()
-{
+void sinelon() {
   // a colored dot sweeping back and forth, with fading trails
   fadeToBlackBy( leds, NUM_LEDS, 20);
   int pos = beatsin16( 13, 0, NUM_LEDS-1 );
   leds[pos] += CHSV( gHue, 255, 192);
 }
 
-void bpm()
-{
+void bpm() {
   // colored stripes pulsing at a defined Beats-Per-Minute (BPM)
   uint8_t BeatsPerMinute = 62;
   CRGBPalette16 palette = PartyColors_p;
@@ -258,23 +148,9 @@ void juggle() {
 typedef void (*SimplePatternList[])();
 SimplePatternList gPatterns = { rainbow, rainbowWithGlitter, confetti, sinelon, juggle, bpm };
 
-void nextPattern()
-{
+void nextPattern() {
   // add one to the current pattern number, and wrap around at the end
   gCurrentPatternNumber = (gCurrentPatternNumber + 1) % ARRAY_SIZE( gPatterns);
 }
+*/
 
-void loop()
-{
-  // Call the current pattern function once, updating the 'leds' array
-  gPatterns[gCurrentPatternNumber]();
-
-  // send the 'leds' array out to the actual LED strip
-  FastLED.show();  
-  // insert a delay to keep the framerate modest
-  FastLED.delay(1000/FRAMES_PER_SECOND); 
-
-  // do some periodic updates
-  EVERY_N_MILLISECONDS( 20 ) { gHue++; } // slowly cycle the "base color" through the rainbow
-  EVERY_N_SECONDS( 10 ) { nextPattern(); } // change patterns periodically
-}
