@@ -8,11 +8,7 @@ FASTLED_USING_NAMESPACE
 
 // directors
 #include "simpleDirector.h"
-
-// Pixel and Microcontroller settings
-#define DATA_PIN 3
-#define LED_TYPE WS2812B
-#define MAX_LEDS 3000
+#include "dispatch.h"
 
 // working variables
 // unsigned int numberOfLeds;
@@ -23,11 +19,7 @@ unsigned char selectedDirector = 0;
 // TODO: this is wasteful. Maybe fix this later.
 // CRGB leds[MAX_LEDS];
 
-// TODO - this struct isn't working yet...
-// test_led_struct_t global_led_struct;
-
-
-
+test_led_struct_t global_led_struct;
 
 void setupDirectors (
     CRGB **ledStrips,
@@ -44,7 +36,7 @@ void setupDirectors (
   }
 
   // TODO - make this compile...
-  //global_led_struct.num_leds_configured = 100;
+  global_led_struct.num_leds_configured = 100;
 
   // call the setup function for each director.
   // setupSimpleDirector(numberOfLeds);
@@ -59,13 +51,13 @@ void dispatchDirector (
 
   // set all leds to black.
   // fill_solid(leds, numberOfLeds, CRGB(0,0,0));
+  fill_solid(global_led_struct.leds, global_led_struct.num_leds_configured, CRGB(0,0,0));
 
   switch (selectedDirector) {
     case 0:
-      tickSimpleDirector(leds, numberOfLeds, frameNumber);
-
+      //tickSimpleDirector(leds, numberOfLeds, frameNumber);
       // TODO - figure out struct syntax
-      // tickSimpleDirector(&global_led_struct, frameNumber);
+       tickSimpleDirector(&global_led_struct, frameNumber);
       break;
     default:
       Serial.println("Woah!! we don't have a valid director selected!");
@@ -86,9 +78,11 @@ void startDirector () {
   };
 
   // pixel arrays.
+  //FIXME Dynamicly allocated array on the stack. How much stack space do we have??? Will we overflow???
   CRGB ledStrips[numberOfStrips][numberOfLedsPerStrip];
 
   // surrogate
+  //FIXME Dynamicly allocated array on the stack. How much stack space do we have??? Will we overflow???
   CRGB *pointersToLedStrips[numberOfStrips];
   for (int i = 0; i < numberOfStrips; ++i) {
     pointersToLedStrips[i] = ledStrips[i];
