@@ -77,7 +77,9 @@ patternRunFrame (pattern_spec, pixel_count, time, director_rng, scene_rng, patte
 
 
 void setup() {
-  setupDirectors();
+  // setupDirectors();
+
+  // TODO - remove this from the live code.
   Serial.begin(9600);
 }
 
@@ -85,7 +87,8 @@ void setup() {
 void loop() {
   // maybe we could eventually pass in WHICH director we are interested
   // in working with?
-  dispatchDirector();
+
+  startDirector();
 }
 
 

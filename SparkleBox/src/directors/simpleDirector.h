@@ -5,7 +5,11 @@
   #define SIMPLE_DIRECTOR_H
   #include "FastLED.h"
 
-  void setupSimpleDirector (unsigned short int numOfPixels);
-  CRGB* tickSimpleDirector(/* unsigned int frameNumber */);
+  void setupSimpleDirector ();
+  void tickSimpleDirector(
+    CRGB leds[],
+    unsigned int numberOfLeds,
+    unsigned int frameNumber
+  );
 
 #endif

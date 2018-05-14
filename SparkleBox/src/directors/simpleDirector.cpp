@@ -6,28 +6,25 @@
 #include "FastLED.h"
 
 // working variables
-unsigned short int numLeds;
+unsigned char startingColorForFrame = 0;
 
-
-void setupSimpleDirector (unsigned short int _numLeds) {
-  numLeds = _numLeds;
+void setupSimpleDirector () {
+  // this is here if we need setup stuff.
 }
 
-
-unsigned char startingColorForFrame = 0;
-CRGB* tickSimpleDirector (unsigned int frameNumber) {
-  CRGB leds[numLeds];
-
+void tickSimpleDirector (
+    CRGB leds[],
+    unsigned int numberOfLeds,
+    unsigned int frameNumber
+  ) {
   // rotate the starting color - this will move the rainbow to the right
   // frame by frame;
   startingColorForFrame++;
 
   // make the rainbow
   unsigned char currentColor = startingColorForFrame;
-  for (int i; i<numLeds; i++) {
+  for (int i; i<numberOfLeds; i++) {
     leds[i].setHSV(currentColor, 255, 255);
     currentColor++;
   }
-
-  return leds;
 }
