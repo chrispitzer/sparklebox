@@ -26,6 +26,13 @@ unsigned char selectedDirector = 0;
 CRGB leds[MAX_LEDS];
 CRGB tempLeds[MAX_LEDS];
 
+typedef struct {
+  uint32_t num_leds_configured;
+  CRGB leds[MAX_LEDS];
+  CRGB tempLeds[MAX_LEDS];
+} test_led_struct_t;
+
+test_led_struct_t global_led_struct;
 
 // these should be pulled out of a user configurable `global settings`
 // part of memory... It should be in EEPROM.
@@ -40,6 +47,7 @@ CRGB tempLeds[MAX_LEDS];
 
 void setupDirectors (int numberOfLeds) {
   numberOfLeds = 100; // TODO: this should come from EEPROM
+  global_led_struct.num_leds_configured = 100;
 
   // set all possible LEDs to black
   fill_solid(leds, MAX_LEDS, CRGB(0,0,0));
@@ -62,6 +70,7 @@ void dispatchDirector () {
   switch (selectedDirector) {
     case 0:
       tickSimpleDirector(leds, tempLeds, numberOfLeds, frameNumber);
+      tickSimpleDirector(&global_led_struct, frameNumber);
       break;
     default:
       Serial.println("Woah!! we don't have a valid director selected!");

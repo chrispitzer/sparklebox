@@ -4,6 +4,9 @@
 
   #define DIRECTOR_DISPATCH_H
 
+
+  extern test_led_struct_t global_led_struct;
+  
   void setupDirectors();
   void dispatchDirector();
 
