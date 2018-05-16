@@ -1,63 +1,60 @@
-// without this interrupts setting FastLED will crash the ESP32. Fun!
-#define FASTLED_ALLOW_INTERRUPTS 0
-
-// libraries
-#include "Arduino.h"
-#include "FastLED.h"
-FASTLED_USING_NAMESPACE
-
-// directors
-#include "simpleDirector.h"
 #include "dispatch.h"
 
 // working variables
-// unsigned int numberOfLeds;
-unsigned int frameNumber = 0;
-unsigned char selectedDirector = 0;
+uint32_t frameNumber = 0;
+uint8_t selectedDirector = 0;
 
-// pixel arrays.
-// TODO: this is wasteful. Maybe fix this later.
-// CRGB leds[MAX_LEDS];
 
-test_led_struct_t global_led_struct;
+void setupDirectors () {
 
-void setupDirectors (
-    CRGB **ledStrips,
-    unsigned int numberOfStrips,
-    unsigned int numberOfLedsPerStrip
-  ) {
+  loadDataFromEEPROM();
 
-  for (int i=0; i<numberOfStrips; i++) {
-    // start them off as black.
-    fill_solid(ledStrips[i], numberOfLedsPerStrip, CRGB::Black);
+  // Start by blacking all POSSIBLE leds.
+  fill_solid(globalLeds.leds, MAX_LEDS, CRGB(0,0,0));
+  fill_solid(globalLeds.sceneWorkingLeds, MAX_LEDS, CRGB(0,0,0));
+  fill_solid(globalLeds.patternWorkingLeds, MAX_LEDS, CRGB(0,0,0));
 
-    // set up FastLED for this strip
-    FastLED.addLeds<LED_TYPE, DATA_PIN>(ledStrips[i], numberOfLedsPerStrip);
+
+  /*
+  Here's how I set up two led strips in FastLED from 
+  one array of pixel data before... I'm trying to replicate this now.
+
+  CRGB bigLedArray[10];
+
+  FastLED.addLeds<LED_TYPE, 15>(&bigLedArray[0], 5);
+  FastLED.addLeds<LED_TYPE, 2>(&bigLedArray[5], 5);
+
+  while (true) {
+    fill_solid(&bigLedArray[0], 5, CRGB(0,0,0));
+    fill_solid(&bigLedArray[5], 5, CRGB(0,0,0));
+    FastLED.show();
+    delay(300);
+
+    fill_solid(&bigLedArray[0], 5, CRGB(0,255,0)); // one strip on pin 15 blinks green
+    fill_solid(&bigLedArray[5], 5, CRGB(0,0,255)); // the other strip on pin 2 blinks red
+    FastLED.show();
+    delay(300);
   }
+  */
 
-  // TODO - make this compile...
-  global_led_struct.num_leds_configured = 100;
 
-  // call the setup function for each director.
-  // setupSimpleDirector(numberOfLeds);
+  // TODO call the setup function for each director.
 }
 
-void dispatchDirector (
-    CRGB **ledStrips,
-    unsigned int numberOfStrips,
-    unsigned int numberOfLedsPerStrip
-  ) {
+
+void dispatchDirector () {
   frameNumber++;
 
   // set all leds to black.
-  // fill_solid(leds, numberOfLeds, CRGB(0,0,0));
-  fill_solid(global_led_struct.leds, global_led_struct.num_leds_configured, CRGB(0,0,0));
+  blackAllLeds();
+
+  // fill_solid(globalLeds.leds, globalLeds.num_leds_configured, CRGB(0,0,0));
 
   switch (selectedDirector) {
     case 0:
       //tickSimpleDirector(leds, numberOfLeds, frameNumber);
       // TODO - figure out struct syntax
-       tickSimpleDirector(&global_led_struct, frameNumber);
+       tickSimpleDirector(frameNumber);
       break;
     default:
       Serial.println("Woah!! we don't have a valid director selected!");
@@ -69,29 +66,31 @@ void dispatchDirector (
 }
 
 
-void startDirector () {
-  // Get all this data from EEPROM
-  unsigned int numberOfStrips = 16;
-  unsigned int numberOfLedsPerStrip = 100;
-  unsigned char dataPinsForStrips[] = {
-    15, 2, 0, 4, 5, 18, 19, 21, 22, 23, 13, 12, 14, 27, 26, 25
-  };
+/*
 
-  // pixel arrays.
-  //FIXME Dynamicly allocated array on the stack. How much stack space do we have??? Will we overflow???
-  CRGB ledStrips[numberOfStrips][numberOfLedsPerStrip];
+scenes = [
+    {
+        name: "Under the Sea"
+        patterns: [
+            {
+                id: 5,
+                opacity: .75,
+                blending_thingy: ? maybe we want to tell this something about how to blend the layers in here? 
+                setting_A: 123, // float
+                setting_B: 123, // float
+                setting_C: 123, // float
+                setting_D: 123, // float
+                setting_E: 123, // float
+            },
+            { ... },
+            { ... },
+            { ... },
+        ]
+    }
+]
 
-  // surrogate
-  //FIXME Dynamicly allocated array on the stack. How much stack space do we have??? Will we overflow???
-  CRGB *pointersToLedStrips[numberOfStrips];
-  for (int i = 0; i < numberOfStrips; ++i) {
-    pointersToLedStrips[i] = ledStrips[i];
-  }
-
-  setupDirectors(pointersToLedStrips, numberOfStrips, numberOfLedsPerStrip);
-
-  while (true) {
-    dispatchDirector(pointersToLedStrips, numberOfStrips, numberOfLedsPerStrip);
-  }
+get_scene_spec (scene_id) {
+    return scenes[scene_id]
 }
-// void process_pointer_2_pointer(int **array, size_t rows, size_t cols)
+
+*/
