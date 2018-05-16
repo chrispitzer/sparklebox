@@ -2,7 +2,7 @@
 // #define FASTLED_ALLOW_INTERRUPTS 0
 
 // libraries
-#include "SimpleDirector.h"
+#include "simpleDirector.h"
 // #include "Arduino.h"
 // #include "FastLED.h"
 // #include "dispatch.h"
