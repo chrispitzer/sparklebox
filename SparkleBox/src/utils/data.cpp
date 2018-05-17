@@ -1,30 +1,19 @@
 #include "data.h"
 
 typedef enum {
-  STRIP_A = 15,
-  STRIP_B = 2,
-  STRIP_C = 0,
-  STRIP_D = 4,
-  STRIP_E = 5,
-  STRIP_F = 18,
-  STRIP_G = 19,
-  STRIP_H = 21,
-  STRIP_I = 22,
-  STRIP_J = 23,
-  STRIP_K = 13,
-  STRIP_L = 12,
-  STRIP_M = 14,
-  STRIP_N = 27,
-  STRIP_O = 26,
-  STRIP_P = 25,
+  PIN_0 = 0, PIN_1 = 1, PIN_2 = 2, PIN_3 = 3, PIN_4 = 4, PIN_5 = 5, PIN_6 = 6, PIN_7 = 7, PIN_8 = 8, PIN_9 = 9, PIN_10 = 10,
+  PIN_11 = 11, PIN_12 = 12, PIN_13 = 13, PIN_14 = 14, PIN_15 = 15, PIN_16 = 16, PIN_17 = 17, PIN_18 = 18, PIN_19 = 19, PIN_20 = 20,
+  PIN_21 = 21, PIN_22 = 22, PIN_23 = 23, PIN_24 = 24, PIN_25 = 25, PIN_26 = 26, PIN_27 = 27, PIN_28 = 28, PIN_29 = 29, PIN_30 = 30,
+  PIN_31 = 31, PIN_32 = 32, PIN_33 = 33, PIN_34 = 34, PIN_35 = 35, PIN_36 = 36, PIN_37 = 37, PIN_38 = 38, PIN_39 = 39, PIN_40 = 40,
+  PIN_41 = 41, PIN_42 = 42, PIN_43 = 43, PIN_44 = 44, PIN_45 = 45, PIN_46 = 46, PIN_47 = 47, PIN_48 = 48, PIN_49 = 49, PIN_50 = 50,
 } led_strip_pins_t;
 
 #if 1
   const uint16_t pinNumForEachStrip[16] = {
-    STRIP_A, STRIP_B, STRIP_C, STRIP_D, 
-    STRIP_E, STRIP_F, STRIP_G, STRIP_H, 
-    STRIP_I, STRIP_J, STRIP_K, STRIP_L, 
-    STRIP_M, STRIP_N, STRIP_O, STRIP_P, 
+    PIN_15, PIN_2, PIN_0, PIN_4,
+    PIN_5, PIN_18, PIN_19, PIN_21,
+    PIN_22, PIN_23, PIN_13, PIN_12,
+    PIN_14, PIN_27, PIN_26, PIN_25,
   };
 #else
   const uint16_t pinNumForEachStrip[16] = {
@@ -36,6 +25,12 @@ typedef enum {
 #endif
 
 void loadDataFromEEPROMAddLeds (const int pin_idx, const int offset, const int numLeds) {
+  Serial.println('adding strip on pin');
+  Serial.println('adding strip on pin');
+  Serial.println(pinNumForEachStrip[pin_idx]);
+
+  return;
+  /*
 
   switch((led_strip_pins_t) pinNumForEachStrip[pin_idx]) {
     case STRIP_A:
@@ -87,6 +82,7 @@ void loadDataFromEEPROMAddLeds (const int pin_idx, const int offset, const int n
       FastLED.addLeds<LED_TYPE, STRIP_P>(&globalLeds.leds[offset], numLeds);
       break;
   }
+  */
 }
 
 void loadDataFromEEPROM () {
@@ -119,7 +115,11 @@ void loadDataFromEEPROM () {
     // set up the strip in FastLED
     //FastLED.addLeds<LED_TYPE, pin>(&globalLeds.leds[offset], numLeds);//FIXME "pin" is a variable and must be a constant that is known at compile time. #define values aure usually used for this
     //FastLED.addLeds<LED_TYPE, 1>(&globalLeds.leds[offset], numLeds);
-    loadDataFromEEPROMAddLeds (i, offset, numLeds);
+    delay(1000);
+    Serial.println("about to set up an led strip");
+    Serial.println(i);
+    Serial.println(pin);
+    // loadDataFromEEPROMAddLeds (i, offset, numLeds);
 
     // increment total leds
     globalLeds.totalNumberOfLeds += numLeds;
