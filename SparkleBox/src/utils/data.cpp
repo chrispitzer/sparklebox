@@ -8,17 +8,18 @@ void loadDataFromEEPROM () {
   // these dummy values are for the `portal` piece
   uint16_t numberOfStrips = 16;
   uint16_t numberOfLedsInEachStrip[16] = {
-    30, 50, 55, 60,
-    32, 52, 57, 62,
-    32, 52, 57, 62,
-    34, 54, 59, 64,
+    10, 10, 10, 10,
+    10, 10, 10, 10,
+    10, 10, 10, 10,
+    10, 10, 10, 10,
   };
   uint16_t pinNumberForEachStrip[16] = {
     15, 2, 0, 4,
-    5, 18, 19, 21,
-    22, 23, 13, 12,
-    14, 27, 26, 25,
+    16, 17, 5, 18,
+    19, 21, 22, 23,
+    12, 14, 26, 25,
   };
+  // 27 is glitchy
 
   // set all those values into `globalLeds`
   globalLeds.numberOfStrips = numberOfStrips;
