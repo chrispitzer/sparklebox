@@ -18,9 +18,9 @@
   // Structs
   typedef struct {
     uint16_t numberOfStrips;
-    uint16_t numberOfLedsInStrip[MAX_STRIPS];
-    uint16_t ledOffsetForStrip[MAX_STRIPS];
-    uint16_t pinNumberForStrip[MAX_STRIPS];
+    uint16_t numberOfLedsInEachStrip[MAX_STRIPS];
+    uint16_t ledOffsetForEachStrip[MAX_STRIPS];
+    uint16_t pinNumberForEachStrip[MAX_STRIPS];
     uint16_t totalNumberOfLeds;
     CRGB leds[MAX_LEDS];
     CRGB sceneWorkingLeds[MAX_LEDS];
@@ -29,6 +29,7 @@
 
   // globals variables
   extern led_struct_t globalLeds;
+
   // TODO - set up a new struct and global variable to store current
   // scene info (with director overrides)
 
