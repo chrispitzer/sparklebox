@@ -14,6 +14,5 @@ void tickSimpleDirector (uint32_t frameNumber) {
   for (uint16_t ledIndex=0; ledIndex < globalLeds.totalNumberOfLeds; ledIndex++) {
       globalLeds.leds[ledIndex].setHSV(currentColor, 255, 255);
       currentColor++;
-    }
   }
 }
