@@ -1,8 +1,8 @@
 #include "globals.h"
 
 #include "directors/dispatch.h"
-#include "scenes/dispatch.h"
-#include "patterns/dispatch.h"
+// #include "scenes/dispatch.h"
+// #include "patterns/patterns.h"
 
 
 // This is our main global object!
@@ -14,8 +14,8 @@ void setup() {
   Serial.begin(9600);
 
   setupDirectors();
-  setupScenes();
-  setupPatterns();
+  // setupScenes();
+  // setupPatterns();
 }
 
 

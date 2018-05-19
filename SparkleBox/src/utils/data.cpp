@@ -20,6 +20,7 @@ void loadDataFromEEPROM () {
     12, 14, 26, 25,
   };
   // 27 is glitchy
+  // 2 is the built-in led on the dev board.
 
   // set all those values into `globalLeds`
   globalLeds.numberOfStrips = numberOfStrips;

@@ -1,3 +1,13 @@
+// #include "rainbow_slugs.h"
+#include "patterns.h"
+
+
+void tickRainbowSlugs() {
+  Serial.println("Rainbow Slugs!");
+}
+
+
+
 /*
 
 
