@@ -12,12 +12,52 @@ void setupDirectors () {
   // Start by blacking all POSSIBLE leds.
   fill_solid(globalLeds.leds, MAX_LEDS, CRGB(0,0,0));
   fill_solid(globalLeds.sceneWorkingLeds, MAX_LEDS, CRGB(0,0,0));
-  fill_solid(globalLeds.patternWorkingLeds, MAX_LEDS, CRGB(0,0,0));
 }
 
 
 void dispatchDirector () {
+
+  blueAllLeds();
+  FastLED.show();
+  delay(500);
+
+  blackAllLeds();
+  FastLED.show();
+  delay(500);
+
+  blueAllLeds();
+  FastLED.show();
+  delay(500);
+
+  blackAllLeds();
+  FastLED.show();
+  delay(500);
+
+  greenAllLeds();
+  FastLED.show();
+  delay(500);
+
+  blackAllLeds();
+  FastLED.show();
+  delay(500);
+
+  redAllLeds();
+  FastLED.show();
+  delay(500);
+
+  blackAllLeds();
+  FastLED.show();
+  delay(500);
+
   frameNumber++;
+
+/*
+  if (frameNumber % 1000 == 1) {
+    Serial.println(frameNumber);
+  }
+  */
+
+    /*
 
   // set all leds to black.
   blackAllLeds();
@@ -37,6 +77,7 @@ void dispatchDirector () {
 
   // TODO - dalay here until 1/30 of a second has gone by.
   FastLED.show();
+  */
 }
 
 

@@ -1,12 +1,11 @@
 #include "globals.h"
 
 #include "directors/dispatch.h"
-// #include "scenes/dispatch.h"
-// #include "patterns/patterns.h"
 
 
-// This is our main global object!
+// Global data objects
 led_struct_t globalLeds;
+pattern_instance_settings_t patternSettings;
 
 
 void setup() {
@@ -14,8 +13,6 @@ void setup() {
   Serial.begin(9600);
 
   setupDirectors();
-  // setupScenes();
-  // setupPatterns();
 }
 
 

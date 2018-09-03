@@ -10,10 +10,12 @@
   #include "Arduino.h"
 
   // Pixel and Microcontroller settings
-  #define DATA_PIN 3
+  #define DATA_PIN 2
   #define LED_TYPE WS2812B
   #define MAX_STRIPS 30
   #define MAX_LEDS 3000
+  #define MAX_PATTERNS_PER_SCENE 30
+  #define STRIP_COLOR_ORDER BGR
 
   // Structs
   typedef struct {

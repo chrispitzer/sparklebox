@@ -8,7 +8,7 @@ void loadDataFromEEPROM () {
   // these dummy values are for the `portal` piece
   uint16_t numberOfStrips = 16;
   uint16_t numberOfLedsInEachStrip[16] = {
-    10, 10, 10, 10,
+    10, 300, 10, 10,
     10, 10, 10, 10,
     10, 10, 10, 10,
     10, 10, 10, 10,
