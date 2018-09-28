@@ -4,8 +4,9 @@
   // SparkleBox Stuff.
   #include "../globals.h"
 
-  // Exposed Functions
-  void tickRainbowSlugs ();
-  void tickColorRotate ();
+  // namespace Patterns {
+    // Exposed Functions
+     void ColorRotate ();
+  // }
 
 #endif

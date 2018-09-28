@@ -8,10 +8,10 @@
   #include "../globals.h"
   #include "../utils/data.h"
   #include "../utils/leds.h"
-  #include "simpleDirector.h"
+  #include "../patterns/patterns.h"
 
   // Exposed Functions
-  void setupDirectors();
-  void dispatchDirector();
+  void setupDirectors ();
+  void dispatchDirector ();
 
 #endif

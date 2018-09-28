@@ -17,67 +17,35 @@ void setupDirectors () {
 
 void dispatchDirector () {
 
-  blueAllLeds();
-  FastLED.show();
-  delay(500);
-
+  // STEP 1
+  // get this calling an animator.
+  // Pipe that animator to the output pixels.
+  // Send that to the LED strip.
   blackAllLeds();
+  // Patterns::ColorRotate();
+  ColorRotate();
   FastLED.show();
-  delay(500);
+  delay(10);
 
-  blueAllLeds();
-  FastLED.show();
-  delay(500);
 
-  blackAllLeds();
-  FastLED.show();
-  delay(500);
 
-  greenAllLeds();
-  FastLED.show();
-  delay(500);
+  // STEP 2
+  // Run one animator
+  // pipe that to the output pixels
+  // run another animator
+  // pipe that to the output pixels on top of the first signal
+  // send that to the LED strip.
 
-  blackAllLeds();
-  FastLED.show();
-  delay(500);
 
-  redAllLeds();
-  FastLED.show();
-  delay(500);
 
-  blackAllLeds();
-  FastLED.show();
-  delay(500);
+  // STEP 3
+  // Have a concept of an oscilator
 
-  frameNumber++;
 
-/*
-  if (frameNumber % 1000 == 1) {
-    Serial.println(frameNumber);
-  }
-  */
+  // STEP 4
+  // pipe the oscilator to the animator
 
-    /*
 
-  // set all leds to black.
-  blackAllLeds();
-
-  // fill_solid(globalLeds.leds, globalLeds.num_leds_configured, CRGB(0,0,0));
-
-  switch (selectedDirector) {
-    case 0:
-      //tickSimpleDirector(leds, numberOfLeds, frameNumber);
-      // TODO - figure out struct syntax
-       tickSimpleDirector(frameNumber);
-      break;
-    default:
-      Serial.println("Woah!! we don't have a valid director selected!");
-      break;
-  }
-
-  // TODO - dalay here until 1/30 of a second has gone by.
-  FastLED.show();
-  */
 }
 
 
