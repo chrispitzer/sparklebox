@@ -1,6 +1,6 @@
 {
     "terminal.integrated.env.osx": {
-        "PATH": "/Users/chris.pitzer/.platformio/penv/bin:/Users/chris.pitzer/.platformio/penv:/Users/chris.pitzer/.rvm/gems/ruby-2.5.1/bin:/Users/chris.pitzer/.rvm/gems/ruby-2.5.1@global/bin:/Users/chris.pitzer/.rvm/rubies/ruby-2.5.1/bin:/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris.pitzer/.rvm/bin",
+        "PATH": "/Users/chris.pitzer/.platformio/penv/bin:/Users/chris.pitzer/.platformio/penv:/Users/chris.pitzer/.rvm/gems/ruby-2.5.1/bin:/Users/chris.pitzer/.rvm/gems/ruby-2.5.1@global/bin:/Users/chris.pitzer/.rvm/rubies/ruby-2.5.1/bin:/usr/local/opt/python/libexec/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/chris.pitzer/.rvm/bin:/Users/chris.pitzer/esp/xtensa-esp32-elf/bin",
         "PLATFORMIO_CALLER": "vscode"
     }
 }
