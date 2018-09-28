@@ -26,13 +26,55 @@
     uint16_t totalNumberOfLeds;
     CRGB leds[MAX_LEDS];
     CRGB sceneWorkingLeds[MAX_LEDS];
-    CRGB patternWorkingLeds[MAX_LEDS];
   } led_struct_t;
+
+
+
+
+
+
+  // this will be passed inth the setup thingy in the pattern, and then passed
+  // back to it each time it is called. So the pattern will have it's own
+  // instance settings.
+  typedef struct {
+    float_t settingA;
+    float_t settingB;
+    float_t settingC;
+    float_t settingD;
+    float_t settingE;
+    float_t settingF;
+    uint16_t numberOfLeds;
+    uint16_t frameNumber;
+  } pattern_instance_settings_t;
+
+
+  enum class Pattern {
+    colorRotate,
+    solidColor,
+  };
+
+  // enum class Color { red, green = 20, blue };
+  // Color r = Color::blue;
+  // switch(r)
+  // {
+  //     case Color::red  : std::cout << "red\n";   break;
+  //     case Color::green: std::cout << "green\n"; break;
+  //     case Color::blue : std::cout << "blue\n";  break;
+  // }
+  // // int n = r; // error: no scoped enum to int conversion
+  // int n = static_cast<int>(r); // OK, n = 21
+
+
+  typedef struct {
+    uint8_t numberOfPatterns;
+    Pattern patterns[MAX_PATTERNS_PER_SCENE];
+    pattern_instance_settings_t patternSettings[MAX_PATTERNS_PER_SCENE];
+  } scene_instance_settings_t;
+
 
   // globals variables
   extern led_struct_t globalLeds;
 
-  // TODO - set up a new struct and global variable to store current
-  // scene info (with director overrides)
+
 
 #endif
