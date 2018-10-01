@@ -1,6 +1,6 @@
 /*
 
--- a few ideas on different kinds of patterns to write --
+-- a few ideas on different kinds of animators to write --
 * solid color
   - choose a color
   - set brightness

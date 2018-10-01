@@ -22,8 +22,8 @@ void dispatchDirector () {
   // Pipe that animator to the output pixels.
   // Send that to the LED strip.
   blackAllLeds();
-  // Patterns::ColorRotate();
-  ColorRotate();
+  Animations::ColorRotate();
+  // ColorRotate();
   FastLED.show();
   delay(10);
 
@@ -54,7 +54,7 @@ void dispatchDirector () {
 scenes = [
     {
         name: "Under the Sea"
-        patterns: [
+        animations: [
             {
                 id: 5,
                 opacity: .75,

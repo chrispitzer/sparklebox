@@ -14,7 +14,7 @@
   #define LED_TYPE WS2812B
   #define MAX_STRIPS 30
   #define MAX_LEDS 3000
-  #define MAX_PATTERNS_PER_SCENE 30
+  #define MAX_ANIMATIONS_PER_SCENE 30
   #define STRIP_COLOR_ORDER BGR
 
   // Structs
@@ -67,8 +67,8 @@
 
   typedef struct {
     uint8_t numberOfPatterns;
-    Pattern patterns[MAX_PATTERNS_PER_SCENE];
-    pattern_instance_settings_t patternSettings[MAX_PATTERNS_PER_SCENE];
+    Pattern patterns[MAX_ANIMATIONS_PER_SCENE];
+    pattern_instance_settings_t patternSettings[MAX_ANIMATIONS_PER_SCENE];
   } scene_instance_settings_t;
 
 

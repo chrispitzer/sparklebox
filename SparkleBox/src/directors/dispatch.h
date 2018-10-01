@@ -8,7 +8,7 @@
   #include "../globals.h"
   #include "../utils/data.h"
   #include "../utils/leds.h"
-  #include "../patterns/patterns.h"
+  #include "../animations/animations.h"
 
   // Exposed Functions
   void setupDirectors ();
