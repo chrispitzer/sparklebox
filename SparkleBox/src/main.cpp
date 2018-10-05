@@ -4,8 +4,7 @@
 
 
 // Global data objects
-led_struct_t globalLeds;
-pattern_instance_settings_t patternSettings;
+globals_struc_t Globals;
 
 
 void setup() {

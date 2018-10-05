@@ -27,10 +27,10 @@ int16_t speed = 1;
 // }
 
 void colorAllllLeds (CRGB color) {
-  fill_solid(globalLeds.leds, globalLeds.totalNumberOfLeds, color);
+  fill_solid(Globals.leds, Globals.totalNumberOfLeds, color);
   Serial.println("make it a color!");
-  // fill_solid(globalLeds.sceneWorkingLeds, globalLeds.totalNumberOfLeds, color);
 }
+
 
 
 namespace Animations {

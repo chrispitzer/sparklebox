@@ -22,17 +22,17 @@ void loadDataFromEEPROM () {
   // 27 is glitchy
   // 2 is the built-in led on the dev board.
 
-  // set all those values into `globalLeds`
-  globalLeds.numberOfStrips = numberOfStrips;
-  globalLeds.totalNumberOfLeds = 0;
+  // set all those values into `Globals`
+  Globals.numberOfStrips = numberOfStrips;
+  Globals.totalNumberOfLeds = 0;
   for (int i=0; i<numberOfStrips; i++) {
     // set values for this strip...
-    globalLeds.pinNumberForEachStrip[i] = pinNumberForEachStrip[i];
-    globalLeds.numberOfLedsInEachStrip[i] = numberOfLedsInEachStrip[i];
-    globalLeds.ledOffsetForEachStrip[i] = globalLeds.totalNumberOfLeds;
+    Globals.pinNumberForEachStrip[i] = pinNumberForEachStrip[i];
+    Globals.numberOfLedsInEachStrip[i] = numberOfLedsInEachStrip[i];
+    Globals.ledOffsetForEachStrip[i] = Globals.totalNumberOfLeds;
 
     // increment total number of LEDS to account for this strip...
     // This will also be the offset for the next strip (if there's a next strip)
-    globalLeds.totalNumberOfLeds += numberOfLedsInEachStrip[i];
+    Globals.totalNumberOfLeds += numberOfLedsInEachStrip[i];
   }
 }
