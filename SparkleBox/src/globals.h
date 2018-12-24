@@ -26,21 +26,22 @@
     uint16_t totalNumberOfLeds;
     CRGB leds[MAX_LEDS];
     CRGB sceneWorkingLeds[MAX_LEDS];
-  } globals_struc_t;
+  } globals_struct_t;
 
   typedef struct {
     uint16_t numberOfLeds;
     CRGB leds[MAX_LEDS];
 
-    // these are the parameters for the current animation
+    // settings are the `read only` settings passed to the animation function
     float settings[10];
-
-    // settings for the animation go here.
-    // feel free to be like `animation_settings_struct my_settings`...
-  } current_animation_workspace_struct_t;
+    // memory is the `read/write` data that the animation can change and
+    // receive back next frame.
+    float memory[10];
+  } current_animation_data_struct_t;
 
   // globals variables
-  extern globals_struc_t Globals;
-  extern current_animation_workspace_struct_t CurrentAnimation;
+  extern globals_struct_t Globals;
+
+  extern current_animation_data_struct_t CurrentAnimation;
 
 #endif

@@ -4,7 +4,7 @@
 
 
 // Global data objects
-globals_struc_t Globals;
+globals_struct_t Globals;
 
 
 void setup() {

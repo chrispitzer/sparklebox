@@ -18,7 +18,7 @@ void dispatchDirector () {
   // Pipe that animator to the output pixels.
   // Send that to the LED strip.
   blackAllLeds();
-  Animations::ColorRotate();
+  Animations::ColorRotate.animate();
   // ColorRotate();
   FastLED.show();
   delay(10);
