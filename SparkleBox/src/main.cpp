@@ -14,6 +14,7 @@ void setup() {
 
   // Set up all the animation libraries...
   AnimationSetUpFunctions::setUpAllAnimations();
+  AnimationUtils::setUpCurrentAnimation();
 
   // load in the flash memory...
   EEPROM::loadData();

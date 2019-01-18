@@ -13,22 +13,33 @@ static char const *SETTINGS_NAMES[] = {
 uint8_t const NUMBER_OF_SETTINGS = 1;
 
 // Memory...
-#define LAST_COLOR 0
-#define INIT_LAST_COLOR 0
-#define NUMBER_OF_MEMORIES 1
+#define LAST_COLOR 0          // this is the index of this value in `memories`
+#define INIT_LAST_COLOR 0     // this is the init/default value of this memory.
+#define NUMBER_OF_MEMORIES 1  // this is the total number of memories.
 
 
 void initMemory () {
-  // this should be correct, but we haven't set up `CurrentAnimation` yet...
-  // CurrentAnimation.memory[LAST_COLOR] = INIT_LAST_COLOR;
+  // Set up the actual memory array.
+  float memories[NUMBER_OF_MEMORIES] = {
+    INIT_LAST_COLOR // with the init values
+  };
+  CurrentAnimation.memories = memories;
 }
 
 
 void animate () {
+  // OK - HERE'S WHAT TO DO NEXT!!!
+  // TRY TO GET THAT VALUE BACK OUT OF MEMORIES!!!
+  // MAKE SOME PIXELS!
+
+
+
+
   // retrieve memory
   // currentColor = CurrentAnimation.memory[MEMORY_LAST_COLOR];
   // speed = CurrentAnimation.settings[SETTING_SPEED];
   // currentColor += speed;
+
 
   // do the animation
   AnimationUtils::fillAllPixels (
