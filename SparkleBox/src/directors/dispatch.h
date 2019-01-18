@@ -6,12 +6,8 @@
 
   // SparkleBox Stuff.
   #include "../globals.h"
-  #include "../utils/data.h"
-  #include "../utils/leds.h"
-  #include "../animations/animations.h"
 
   // Exposed Functions
-  void setupDirectors ();
   void dispatchDirector ();
 
 #endif

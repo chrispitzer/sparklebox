@@ -1,36 +1,6 @@
 #include "leds.h"
 
 
-void colorAllLeds (CRGB color) {
-  fill_solid(Globals.leds, Globals.totalNumberOfLeds, color);
-  Serial.println("make it a color!");
-}
-
-
-void blackAllLeds () {
-  Serial.println("black");
-  colorAllLeds(CRGB(0,0,0));
-}
-
-
-void redAllLeds () {
-  Serial.println("red");
-  colorAllLeds(CRGB(255,0,0));
-}
-
-
-void greenAllLeds () {
-  Serial.println("green");
-  colorAllLeds(CRGB(0,255,0));
-}
-
-
-void blueAllLeds () {
-  Serial.println("blue");
-  colorAllLeds(CRGB(0,0,255));
-}
-
-
 int offsetInGlobals = 0;
 void instantiateAnLedStrip (uint16_t pin, uint16_t numberOfLeds) {
   // TODO - redo this. We're not building a general purpose framework that will run on anything.

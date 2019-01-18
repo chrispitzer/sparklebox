@@ -1,28 +1,17 @@
 #include "dispatch.h"
+#include "../animations/animations.h"
+// #include "../utils/data.h"
+// #include "../utils/leds.h"
 
 // working variables
 uint32_t frameNumber = 0;
 uint8_t selectedDirector = 0;
 
 
-void setupDirectors () {
-  loadDataFromEEPROM();
-  instantiateLedStrips();
-}
-
-
 void dispatchDirector () {
 
   // STEP 1
-  // get this calling an animator.
-  // Pipe that animator to the output pixels.
-  // Send that to the LED strip.
-  blackAllLeds();
-  Animations::ColorRotate.animate();
-  // ColorRotate();
-  FastLED.show();
-  delay(10);
-
+  // set all LEDs to black.
 
 
   // STEP 2
@@ -32,6 +21,13 @@ void dispatchDirector () {
   // pipe that to the output pixels on top of the first signal
   // send that to the LED strip.
 
+  // get this calling an animator.
+  // Pipe that animator to the output pixels.
+  // Send that to the LED strip.
+  Animations::ColorFade.animate();
+  // ColorRotate();
+  FastLED.show();
+  delay(10);
 
 
   // STEP 3

@@ -39,6 +39,10 @@
     float memory[10];
   } current_animation_data_struct_t;
 
+  namespace EEPROM {
+    extern void loadData ();
+  }
+
   // globals variables
   extern globals_struct_t Globals;
 

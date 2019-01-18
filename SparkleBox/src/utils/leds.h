@@ -7,13 +7,6 @@
   // Exposed Setup Functions
   void instantiateLedStrips ();
 
-  // Exposed Runtime Functions
-  void colorAllLeds (CRGB color);
-  void blackAllLeds ();
-  void redAllLeds ();
-  void greenAllLeds ();
-  void blueAllLeds ();
-
   // Obnoxious defines because C++ is HORRIBLE.
   #define PIN_0 0
   #define PIN_1 1
