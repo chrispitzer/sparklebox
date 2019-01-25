@@ -4,7 +4,7 @@
   // SparkleBox Stuff.
   #include "../globals.h"
 
-  struct animation_struct_t {
+  struct animator_struct_t {
     // Animator Name
     char const *name;
     // (read right to left) "`name` is a pointer to a constant char."
@@ -38,7 +38,7 @@
     */
 
     // Methods
-    void (*initializeAnimationMemory)();
+    void (*initMemory)();
     void (*animate)();
   };
 
@@ -55,17 +55,25 @@
   extern animation_workspace_t CurrentAnimation;
 
 
-  namespace Animations {
-    extern animation_struct_t ColorFade;
+  namespace Animators {
+    extern animator_struct_t ColorFade;
   }
 
   namespace AnimationUtils {
-    extern void fillAllPixels (CHSV hsv);
-    extern void fillAllPixels (CRGB rgb);
+    extern void renderFrame ();
+    extern void renderLayer ();
+    extern void renderAnimation ();
+    extern void renderEffect ();
+
     extern void setUpCurrentAnimation ();
   }
 
-  namespace AnimationSetUpFunctions {
+  namespace DrawingUtils {
+    extern void fillAllPixels (CHSV hsv);
+    extern void fillAllPixels (CRGB rgb);
+  }
+
+  namespace AnimatorSetUpFunctions {
 
     // TODO - this miiiiiiight not be necessary. Delete it after we have
     // a few animations that exist if we aren't using it yet.

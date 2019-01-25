@@ -1,10 +1,11 @@
-#include "leds.h"
+#include "utils.h"
 
 
 int offsetInGlobals = 0;
 void instantiateAnLedStrip (uint16_t pin, uint16_t numberOfLeds) {
   // TODO - redo this. We're not building a general purpose framework that will run on anything.
   // This can be opinionated and pick 8 fixed pins on the ESP32.
+  
 
   switch(pin) {
     case PIN_0:
@@ -169,6 +170,7 @@ void instantiateAnLedStrip (uint16_t pin, uint16_t numberOfLeds) {
 
 
 void instantiateLedStrips () {
+  Serial.println("in instantiateLedStrips()");
   for (int i=0; i<Globals.numberOfStrips; i++) {
     instantiateAnLedStrip(
       Globals.pinNumberForEachStrip[i],

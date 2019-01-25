@@ -28,11 +28,11 @@ void initMemory () {
 
 
 void animate () {
+  Serial.println("in Animators::ColorFade.animate ()");
+
   // OK - HERE'S WHAT TO DO NEXT!!!
   // TRY TO GET THAT VALUE BACK OUT OF MEMORIES!!!
   // MAKE SOME PIXELS!
-
-
 
 
   // retrieve memory
@@ -42,7 +42,7 @@ void animate () {
 
 
   // do the animation
-  AnimationUtils::fillAllPixels (
+  DrawingUtils::fillAllPixels (
     // CHSV( currentColor, 255, 255 )
     CHSV( 100, 255, 255 )
   );
@@ -53,34 +53,12 @@ void animate () {
 
 
 
-void AnimationSetUpFunctions::ColorFadeSetUp () {
+void AnimatorSetUpFunctions::ColorFadeSetUp () {
   // we miiiiiiight not need this anymore...
-
-  /*
-  // Animation Basics.
-  Animations::ColorFade.name = (char *)"Color Fade";
-  Animations::ColorFade.initializeAnimationMemory = initMemory;
-  Animations::ColorFade.animate = animate;
-
-  // Settings
-  Animations::ColorFade.numberOfSettings = 2;
-  Animations::ColorFade.settingsNames = {
-    "first setting",
-    "second setting"
-  };
-  //. Animations::ColorFade.
-  //   "Movement Speed",
-  //   "Starting Color"
-  // };
-
-  // Animations::ColorFade.
-
-  */
-
 }
 
 
-animation_struct_t Animations::ColorFade = {
+animator_struct_t Animators::ColorFade = {
   "Color Fade",
   NUMBER_OF_MEMORIES,
   NUMBER_OF_SETTINGS,
