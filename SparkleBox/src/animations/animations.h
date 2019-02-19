@@ -4,7 +4,7 @@
   // SparkleBox Stuff.
   #include "../globals.h"
 
-  struct animator_struct_t {
+  struct animator_t {
     // Animator Name
     char const *name;
     // (read right to left) "`name` is a pointer to a constant char."
@@ -20,16 +20,16 @@
     char const * const *settingsNames;
                         ^^^^^^^^^^^^^    settingsNames is...
     char const * const *settingsNames;
-                ^^^^^^^^                 ...a constant pointer to...
+                 ^^^^^^^                 ...a constant pointer to...
     char const * const *settingsNames;
-               ^                         ...a pointer to...
+         ^^^^^^^                         ...a constant pointer to...
     char const * const *settingsNames;
-    ^^^^^^^^^^                           ...a constant char.
+    ^^^^                                 ...a char.
 
     so...
-    "settingsNames is a constant pointer to a pointer to a constant char."
+    "settingsNames is a constant pointer to a constant pointer to a char."
     And because any pointer can be an array, this is also...
-    "settingsNames is a constant array of arrays of constant chars."
+    "settingsNames is a constant array of constant arrays of chars."
     And because an array of chars is a string...
     "settingsNames is a constant array of constant strings."
 
@@ -37,33 +37,33 @@
 
     */
 
-    // Methods
+    // Pointers to Methods
     void (*initMemory)();
     void (*animate)();
   };
 
-
-  struct animation_workspace_t {
+  struct animator_workspace_t {
     uint16_t numberOfPixels;
     // `leds` will actually be an array of leds.
     CRGB *leds;
     // `memories` will actually be an array of floats.
     float_t *memories;
+    // `settings` will actually be an array of floats.
+    float_t *settings;
   };
   extern CRGB ledBufferA[];
   extern CRGB ledBufferB[];
-  extern animation_workspace_t CurrentAnimation;
-
+  extern animator_workspace_t CurrentAnimation;
 
   namespace Animators {
-    extern animator_struct_t ColorFade;
+    extern animator_t ColorFade;
   }
 
   namespace AnimationUtils {
-    extern void renderFrame ();
-    extern void renderLayer ();
-    extern void renderAnimation ();
-    extern void renderEffect ();
+    extern void renderFrame (); // a frame has multiple layers
+    extern void renderLayer (); // a layer has an animation and multiple effects
+    extern void renderAnimation (); // an animation outputs an array of colors
+    extern void renderEffect (); // an effect has an input array of colors and an output array of colors
 
     extern void setUpCurrentAnimation ();
   }

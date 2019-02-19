@@ -58,7 +58,7 @@ void AnimatorSetUpFunctions::ColorFadeSetUp () {
 }
 
 
-animator_struct_t Animators::ColorFade = {
+animator_t Animators::ColorFade = {
   "Color Fade",
   NUMBER_OF_MEMORIES,
   NUMBER_OF_SETTINGS,

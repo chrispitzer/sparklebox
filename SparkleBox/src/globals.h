@@ -28,6 +28,30 @@
     CRGB sceneWorkingLeds[MAX_LEDS];
   } globals_struct_t;
 
+
+  // Data Models for holding Scene / Frame / Layer / Animator / Effect data
+  // These are the data models that will change, potentially, every frame.
+  struct animator_settings_t {
+    float_t *settings;
+    uint8_t animatorID;
+  };
+  struct effect_settings_t {
+    float_t *settings;
+    uint8_t effectID;
+  };
+  struct layer_settings_t {
+    animator_settings_t animation;
+    effect_settings_t effect;
+    uint8_t opacity;
+  };
+  struct frame_settings_t {
+    layer_settings_t *layers;
+    uint8_t fps;
+    float_t time; // time in seconds.
+    uint32_t frameNumber; // time rounded to the nearest frame.
+  };
+  extern frame_settings_t FrameSettings;
+
   namespace EEPROM {
     extern void loadData ();
   }
